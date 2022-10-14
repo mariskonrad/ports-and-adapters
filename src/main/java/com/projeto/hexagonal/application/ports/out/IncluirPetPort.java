@@ -1,8 +1,7 @@
 package com.projeto.hexagonal.application.ports.out;
 
-import com.projeto.hexagonal.adapters.inbound.request.IncluirPetRequest;
-import com.projeto.hexagonal.adapters.inbound.response.IncluirPetResponse;
+import com.projeto.hexagonal.application.core.domain.Pet;
 
 public interface IncluirPetPort {
-    IncluirPetResponse incluir(IncluirPetRequest request);
+    Pet incluir(Pet pet);
 }

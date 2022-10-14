@@ -2,26 +2,35 @@ package com.projeto.hexagonal.adapters.inbound.mapper;
 
 import com.projeto.hexagonal.adapters.inbound.entity.PetEntity;
 import com.projeto.hexagonal.adapters.inbound.request.IncluirPetRequest;
-import com.projeto.hexagonal.adapters.inbound.response.IncluirPetResponse;
+import com.projeto.hexagonal.application.core.domain.Pet;
 
 public class IncluirPetMapper {
-    public static PetEntity toEntity(IncluirPetRequest request) {
+    public static PetEntity toEntity(Pet pet) {
         PetEntity entity = new PetEntity();
-        entity.setNome(request.getNome());
-        entity.setResponsavel(request.getResponsavel());
-        entity.setTamanho(request.getTamanho());
-        entity.setPremium(request.isPremium());
+        entity.setNome(pet.getNome());
+        entity.setResponsavel(pet.getResponsavel());
+        entity.setTamanho(pet.getTamanho());
+        entity.setPremium(pet.isPremium());
         return entity;
     }
 
-    public static IncluirPetResponse toResponse(PetEntity entity) {
-        IncluirPetResponse response = new IncluirPetResponse();
-        response.setId(entity.getId());
-        response.setNome(entity.getNome());
-        response.setResponsavel(entity.getResponsavel());
-        response.setTamanho(entity.getTamanho());
-        response.setPremium(entity.isPremium());
-        return response;
+    public static Pet toPet(PetEntity entity) {
+        Pet pet = new Pet();
+        pet.setId(entity.getId());
+        pet.setNome(entity.getNome());
+        pet.setResponsavel(entity.getResponsavel());
+        pet.setTamanho(entity.getTamanho());
+        pet.setPremium(entity.isPremium());
+        return pet;
+    }
+
+    public static Pet requestToPet(IncluirPetRequest petRequest) {
+        var pet = new Pet();
+        pet.setNome(petRequest.getNome());
+        pet.setResponsavel(petRequest.getResponsavel());
+        pet.setTamanho(petRequest.getTamanho());
+        pet.setPremium(petRequest.isPremium());
+        return pet;
     }
 
 }
