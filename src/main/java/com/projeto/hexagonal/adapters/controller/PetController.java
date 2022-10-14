@@ -1,8 +1,8 @@
 package com.projeto.hexagonal.adapters.controller;
 
-import com.projeto.hexagonal.application.core.service.IncluirPetService;
 import com.projeto.hexagonal.adapters.inbound.request.IncluirPetRequest;
-import com.projeto.hexagonal.adapters.inbound.response.IncluirPetResponse;
+import com.projeto.hexagonal.application.core.domain.Pet;
+import com.projeto.hexagonal.application.core.service.IncluirPetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +17,7 @@ public class PetController {
     private IncluirPetService incluirPetService;
 
     @PostMapping
-    public IncluirPetResponse incluir(@RequestBody IncluirPetRequest petRequest) {
+    public Pet incluir(@RequestBody IncluirPetRequest petRequest) {
         return incluirPetService.incluir(petRequest);
     }
 }
