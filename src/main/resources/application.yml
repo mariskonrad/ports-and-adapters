@@ -3,6 +3,9 @@ spring:
     url: jdbc:postgresql://localhost:5432/crepet
     username: ${USERNAME}
     password: ${PASSWORD}
+  sql:
+    init:
+      mode: always
 server:
   error:
     include-message: always

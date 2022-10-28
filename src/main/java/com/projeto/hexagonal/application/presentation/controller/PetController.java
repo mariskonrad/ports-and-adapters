@@ -1,7 +1,7 @@
 package com.projeto.hexagonal.application.presentation.controller;
 
 import com.projeto.hexagonal.application.presentation.request.IncluirPetRequest;
-import com.projeto.hexagonal.application.service.IncluirPetService;
+import com.projeto.hexagonal.core.ports.IncluirPetServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class PetController {
 
     @Autowired
-    private IncluirPetService incluirPetService;
+    private IncluirPetServiceImpl incluirPetService;
 
     @PostMapping
     public void incluir(@RequestBody IncluirPetRequest petRequest) {

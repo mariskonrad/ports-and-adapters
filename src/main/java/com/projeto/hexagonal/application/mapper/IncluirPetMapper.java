@@ -9,6 +9,7 @@ public class IncluirPetMapper {
         PetEntity entity = new PetEntity();
         entity.setNome(pet.getNome());
         entity.setResponsavel(pet.getResponsavel());
+        entity.setDataInclusao(pet.getDataInclusao());
         entity.setTamanho(pet.getTamanho());
         entity.setPremium(pet.isPremium());
         return entity;
@@ -19,6 +20,7 @@ public class IncluirPetMapper {
         pet.setId(entity.getId());
         pet.setNome(entity.getNome());
         pet.setResponsavel(entity.getResponsavel());
+        pet.setDataInclusao(entity.getDataInclusao());
         pet.setTamanho(entity.getTamanho());
         pet.setPremium(entity.isPremium());
         return pet;
