@@ -1,14 +1,35 @@
-package com.projeto.hexagonal.application.core.domain;
+package com.projeto.hexagonal.application.entity;
+
+import com.projeto.hexagonal.core.domain.Tamanho;
 
 import java.time.LocalDateTime;
 
-public class Pet {
+public class PetEntity {
     private Long id;
     private String nome;
     private String responsavel;
+
+    public PetEntity(Long id, String nome, String responsavel, LocalDateTime dataInclusao, Tamanho tamanho, boolean premium) {
+        this.id = id;
+        this.nome = nome;
+        this.responsavel = responsavel;
+        this.dataInclusao = dataInclusao;
+        this.tamanho = tamanho;
+        this.premium = premium;
+    }
+
+    public PetEntity() {
+        this.setId(null);
+        this.setNome("");
+        this.setResponsavel(null);
+        this.setDataInclusao(null);
+        this.setTamanho(null);
+        this.setPremium(false);
+    }
+
     private LocalDateTime dataInclusao;
 
-
+    private Tamanho tamanho;
 
     public Long getId() {
         return id;
@@ -58,6 +79,6 @@ public class Pet {
         this.premium = premium;
     }
 
-    private Tamanho tamanho;
     private boolean premium;
+
 }

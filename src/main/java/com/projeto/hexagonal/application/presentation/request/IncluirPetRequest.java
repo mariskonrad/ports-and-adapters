@@ -1,6 +1,6 @@
-package com.projeto.hexagonal.adapters.inbound.request;
+package com.projeto.hexagonal.application.presentation.request;
 
-import com.projeto.hexagonal.application.core.domain.Tamanho;
+import com.projeto.hexagonal.core.domain.Tamanho;
 import lombok.Getter;
 import lombok.Setter;
 

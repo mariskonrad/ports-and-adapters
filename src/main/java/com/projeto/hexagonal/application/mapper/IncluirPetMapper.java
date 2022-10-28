@@ -1,8 +1,8 @@
-package com.projeto.hexagonal.adapters.inbound.mapper;
+package com.projeto.hexagonal.application.mapper;
 
-import com.projeto.hexagonal.adapters.inbound.entity.PetEntity;
-import com.projeto.hexagonal.adapters.inbound.request.IncluirPetRequest;
-import com.projeto.hexagonal.application.core.domain.Pet;
+import com.projeto.hexagonal.application.entity.PetEntity;
+import com.projeto.hexagonal.application.presentation.request.IncluirPetRequest;
+import com.projeto.hexagonal.core.domain.Pet;
 
 public class IncluirPetMapper {
     public static PetEntity toEntity(Pet pet) {
@@ -14,7 +14,7 @@ public class IncluirPetMapper {
         return entity;
     }
 
-    public static Pet toPet(PetEntity entity) {
+    public static Pet entityToPet(PetEntity entity) {
         Pet pet = new Pet();
         pet.setId(entity.getId());
         pet.setNome(entity.getNome());
