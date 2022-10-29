@@ -1,11 +1,9 @@
-package com.projeto.hexagonal.core.ports;
+package com.projeto.hexagonal.application.service;
 
 import com.projeto.hexagonal.application.entity.PetEntity;
 import com.projeto.hexagonal.application.infrastructure.PetRepositoryJDBI;
-import com.projeto.hexagonal.application.mapper.IncluirPetMapper;
-import com.projeto.hexagonal.application.presentation.request.IncluirPetRequest;
-import com.projeto.hexagonal.application.service.IncluirPetService;
 import com.projeto.hexagonal.core.domain.Pet;
+import com.projeto.hexagonal.core.ports.IncluirPetService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,8 +22,7 @@ public class IncluirPetServiceImpl implements IncluirPetService {
     }
 
     @Transactional
-    public void incluirNovoPet(IncluirPetRequest petRequest) {
-        Pet pet = IncluirPetMapper.requestToPet(petRequest);
+    public void incluirNovoPet(Pet pet) {
         PetEntity petEntity = toEntity(pet);
         petEntity.setDataInclusao(LocalDateTime.now());
         Long petId;
@@ -33,9 +30,5 @@ public class IncluirPetServiceImpl implements IncluirPetService {
             petId = petRepositoryJDBI.incluirNovoPet(petEntity);
             petEntity.setId(petId);
         }
-    }
-
-    public void incluir(IncluirPetRequest petRequest) {
-        Pet pet = IncluirPetMapper.requestToPet(petRequest);
     }
 }

@@ -7,7 +7,7 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 @Getter @Setter
-public class IncluirPetResponse {
+public class ListarPetResponse {
     private Long id;
     private String nome;
     private String responsavel;
