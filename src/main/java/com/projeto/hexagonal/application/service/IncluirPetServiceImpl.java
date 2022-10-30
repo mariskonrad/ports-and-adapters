@@ -1,7 +1,7 @@
 package com.projeto.hexagonal.application.service;
 
 import com.projeto.hexagonal.application.entity.PetEntity;
-import com.projeto.hexagonal.application.infrastructure.PetRepositoryJDBI;
+import com.projeto.hexagonal.application.infrastructure.IncluirPetRepository;
 import com.projeto.hexagonal.core.domain.Pet;
 import com.projeto.hexagonal.core.ports.IncluirPetService;
 import org.springframework.stereotype.Service;
@@ -15,10 +15,10 @@ import static com.projeto.hexagonal.application.mapper.IncluirPetMapper.toEntity
 @Service
 public class IncluirPetServiceImpl implements IncluirPetService {
 
-    private final PetRepositoryJDBI petRepositoryJDBI;
+    private final IncluirPetRepository incluirPetRepository;
 
-    public IncluirPetServiceImpl(PetRepositoryJDBI petRepositoryJDBI) {
-        this.petRepositoryJDBI = petRepositoryJDBI;
+    public IncluirPetServiceImpl(IncluirPetRepository incluirPetRepository) {
+        this.incluirPetRepository = incluirPetRepository;
     }
 
     @Transactional
@@ -27,7 +27,7 @@ public class IncluirPetServiceImpl implements IncluirPetService {
         petEntity.setDataInclusao(LocalDateTime.now());
         Long petId;
         if (Objects.isNull(pet.getId())) {
-            petId = petRepositoryJDBI.incluirNovoPet(petEntity);
+            petId = incluirPetRepository.incluirNovoPet(petEntity);
             petEntity.setId(petId);
         }
     }

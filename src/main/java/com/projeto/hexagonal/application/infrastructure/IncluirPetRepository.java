@@ -8,7 +8,7 @@ import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
 // essa anotation vai buscar o sql que foi escrito dentro de um arquivo que fica no mesmo caminho que este porém na pasta resources.
 @UseClasspathSqlLocator
-public interface PetRepositoryJDBI {
+public interface IncluirPetRepository {
 
     @SqlUpdate
     @GetGeneratedKeys

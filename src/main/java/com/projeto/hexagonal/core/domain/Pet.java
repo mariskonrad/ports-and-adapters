@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 @Setter
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
 public class Pet {
     private Long id;
     private String nome;

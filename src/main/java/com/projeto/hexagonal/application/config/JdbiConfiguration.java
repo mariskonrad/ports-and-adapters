@@ -1,7 +1,11 @@
 package com.projeto.hexagonal.application.config;
 
-import com.projeto.hexagonal.application.infrastructure.PetRepositoryJDBI;
+import com.projeto.hexagonal.application.infrastructure.IncluirPetRepository;
+import com.projeto.hexagonal.application.infrastructure.ListarPetRepository;
+import com.projeto.hexagonal.core.domain.Pet;
 import org.jdbi.v3.core.Jdbi;
+import org.jdbi.v3.core.mapper.RowMapper;
+import org.jdbi.v3.core.mapper.reflect.ConstructorMapper;
 import org.jdbi.v3.core.spi.JdbiPlugin;
 import org.jdbi.v3.postgres.PostgresPlugin;
 import org.jdbi.v3.sqlobject.SqlObjectPlugin;
@@ -12,6 +16,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
+import java.util.List;
 
 @Configuration
 public class JdbiConfiguration {
@@ -41,10 +46,10 @@ public class JdbiConfiguration {
     }
 
     @Bean
-    Jdbi jdbi(DataSource dataSource) {
+    Jdbi jdbi(DataSource dataSource, List<JdbiPlugin> jdbiPlugins, List<RowMapper<?>> rowMappers) {
         return Jdbi.create(dataSource)
                 .installPlugin(new SqlObjectPlugin())
-                .installPlugin(new PostgresPlugin());
+                .installPlugin(new PostgresPlugin()).registerRowMapper(ConstructorMapper.factory(Pet.class));
     }
 
     @Bean
@@ -54,7 +59,12 @@ public class JdbiConfiguration {
 
     // instanciando o objeto para poder usá-lo na aplicação
     @Bean
-    public PetRepositoryJDBI petRepositoryJDBI(Jdbi jdbi) {
-        return jdbi.onDemand(PetRepositoryJDBI.class);
+    public IncluirPetRepository incluirPetRepository(Jdbi jdbi) {
+        return jdbi.onDemand(IncluirPetRepository.class);
+    }
+
+    @Bean
+    public ListarPetRepository listarPetRepository(Jdbi jdbi) {
+        return jdbi.onDemand(ListarPetRepository.class);
     }
 }
