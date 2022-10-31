@@ -1,9 +1,6 @@
 package com.projeto.hexagonal.application.config;
 
-import com.projeto.hexagonal.application.infrastructure.BuscarPetPorIdRepository;
-import com.projeto.hexagonal.application.infrastructure.DeletarPetPorIdRepository;
-import com.projeto.hexagonal.application.infrastructure.IncluirPetRepository;
-import com.projeto.hexagonal.application.infrastructure.ListarPetRepository;
+import com.projeto.hexagonal.application.infrastructure.*;
 import com.projeto.hexagonal.core.domain.Pet;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.mapper.RowMapper;
@@ -79,5 +76,10 @@ public class JdbiConfiguration {
     @Bean
     public DeletarPetPorIdRepository deletarPetPorIdRepository(Jdbi jdbi) {
         return jdbi.onDemand(DeletarPetPorIdRepository.class);
+    }
+
+    @Bean
+    public AtualizarPetRepository atualizarPetRepository(Jdbi jdbi) {
+        return jdbi.onDemand(AtualizarPetRepository.class);
     }
 }

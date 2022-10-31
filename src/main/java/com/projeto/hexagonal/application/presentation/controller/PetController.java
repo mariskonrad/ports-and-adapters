@@ -1,11 +1,9 @@
 package com.projeto.hexagonal.application.presentation.controller;
 
+import com.projeto.hexagonal.application.presentation.request.AtualizarPetRequest;
 import com.projeto.hexagonal.application.presentation.request.IncluirPetRequest;
 import com.projeto.hexagonal.application.presentation.response.PetResponse;
-import com.projeto.hexagonal.core.ports.BuscarPetPorIdService;
-import com.projeto.hexagonal.core.ports.DeletarPetPorIdService;
-import com.projeto.hexagonal.core.ports.IncluirPetService;
-import com.projeto.hexagonal.core.ports.ListarPetService;
+import com.projeto.hexagonal.core.ports.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,8 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-
-import static com.projeto.hexagonal.application.mapper.IncluirPetMapper.requestToPet;
 
 @RestController
 @RequestMapping("/pets")
@@ -32,6 +28,9 @@ public class PetController {
     @Autowired
     private BuscarPetPorIdService buscarPetPorIdService;
 
+    @Autowired
+    private AtualizarPetService atualizarPetService;
+
     @PostMapping
     public void incluir(@RequestBody @Valid IncluirPetRequest petRequest) {
         incluirPetService.incluirNovoPet(petRequest);
@@ -46,6 +45,11 @@ public class PetController {
     public ResponseEntity<List<PetResponse>> listar() {
         List<PetResponse> lista = listarPetService.listarPets();
         return new ResponseEntity<>(lista, HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    public void atualizar(@RequestBody AtualizarPetRequest request, @PathVariable Long id) {
+        atualizarPetService.atualizar(id, request);
     }
 
     @DeleteMapping("/{id}")
