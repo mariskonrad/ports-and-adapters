@@ -21,16 +21,6 @@ import java.util.List;
 public class JdbiConfiguration {
     // instanciando jdbi como ponto de acesso à api jdbi.
 
-//    @Bean
-//    public Jdbi jdbi(DataSource ds, List<JdbiPlugin> jdbiPlugins, List<RowMapper<?>> rowMappers) {
-//        TransactionAwareDataSourceProxy dataSourceProxy = new TransactionAwareDataSourceProxy(ds);
-//        Jdbi jdbi = Jdbi.create(dataSourceProxy);
-//        jdbiPlugins.forEach(jdbi::installPlugin);
-//        rowMappers.forEach(jdbi::registerRowMapper);
-//        return jdbi;
-//    }
-
-
     @Bean
     @ConfigurationProperties("spring.datasource")
     DataSource driverManagerDataSource() {
