@@ -3,7 +3,7 @@ package com.projeto.hexagonal.application.mapper;
 import com.projeto.hexagonal.application.presentation.response.PetResponse;
 import com.projeto.hexagonal.core.domain.Pet;
 
-public class ListarPetMapper {
+public class BuscarPorIdPetMapper {
     public static PetResponse toResponse(Pet pet) {
         return PetResponse.builder()
                 .id(pet.getId())

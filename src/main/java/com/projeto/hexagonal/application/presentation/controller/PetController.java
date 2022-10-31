@@ -1,7 +1,9 @@
 package com.projeto.hexagonal.application.presentation.controller;
 
 import com.projeto.hexagonal.application.presentation.request.IncluirPetRequest;
-import com.projeto.hexagonal.core.domain.Pet;
+import com.projeto.hexagonal.application.presentation.response.PetResponse;
+import com.projeto.hexagonal.core.ports.BuscarPetPorIdService;
+import com.projeto.hexagonal.core.ports.DeletarPetPorIdService;
 import com.projeto.hexagonal.core.ports.IncluirPetService;
 import com.projeto.hexagonal.core.ports.ListarPetService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,15 +26,31 @@ public class PetController {
     @Autowired
     private ListarPetService listarPetService;
 
+    @Autowired
+    private DeletarPetPorIdService deletarPetPorIdService;
+
+    @Autowired
+    private BuscarPetPorIdService buscarPetPorIdService;
+
     @PostMapping
     public void incluir(@RequestBody @Valid IncluirPetRequest petRequest) {
         var pet = requestToPet(petRequest);
         incluirPetService.incluirNovoPet(pet);
     }
 
+    @GetMapping("/{id}")
+    public PetResponse buscarPetPorId(@PathVariable Long id) {
+        return buscarPetPorIdService.buscarPetPorId(id);
+    }
+
     @GetMapping
-    public ResponseEntity<List<Pet>> listar() {
-        List<Pet> lista = listarPetService.listarPets();
+    public ResponseEntity<List<PetResponse>> listar() {
+        List<PetResponse> lista = listarPetService.listarPets();
         return new ResponseEntity<>(lista, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deletar(@PathVariable Long id) {
+        deletarPetPorIdService.deletarPetPorId(id);
     }
 }

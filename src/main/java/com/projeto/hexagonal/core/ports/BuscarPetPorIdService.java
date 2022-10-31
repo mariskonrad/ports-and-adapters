@@ -2,8 +2,7 @@ package com.projeto.hexagonal.core.ports;
 
 import com.projeto.hexagonal.application.presentation.response.PetResponse;
 
-import java.util.List;
+public interface BuscarPetPorIdService {
 
-public interface ListarPetService {
-    List<PetResponse> listarPets();
+    PetResponse buscarPetPorId(Long id);
 }

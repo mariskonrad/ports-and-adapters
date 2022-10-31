@@ -1,0 +1,1 @@
+SELECT * FROM pet WHERE id = :id

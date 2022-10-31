@@ -1,5 +1,7 @@
 package com.projeto.hexagonal.application.config;
 
+import com.projeto.hexagonal.application.infrastructure.BuscarPetPorIdRepository;
+import com.projeto.hexagonal.application.infrastructure.DeletarPetPorIdRepository;
 import com.projeto.hexagonal.application.infrastructure.IncluirPetRepository;
 import com.projeto.hexagonal.application.infrastructure.ListarPetRepository;
 import com.projeto.hexagonal.core.domain.Pet;
@@ -49,7 +51,8 @@ public class JdbiConfiguration {
     Jdbi jdbi(DataSource dataSource, List<JdbiPlugin> jdbiPlugins, List<RowMapper<?>> rowMappers) {
         return Jdbi.create(dataSource)
                 .installPlugin(new SqlObjectPlugin())
-                .installPlugin(new PostgresPlugin()).registerRowMapper(ConstructorMapper.factory(Pet.class));
+                .installPlugin(new PostgresPlugin())
+                .registerRowMapper(ConstructorMapper.factory(Pet.class));
     }
 
     @Bean
@@ -66,5 +69,15 @@ public class JdbiConfiguration {
     @Bean
     public ListarPetRepository listarPetRepository(Jdbi jdbi) {
         return jdbi.onDemand(ListarPetRepository.class);
+    }
+
+    @Bean
+    public BuscarPetPorIdRepository buscarPetPorIdRepository(Jdbi jdbi) {
+        return jdbi.onDemand(BuscarPetPorIdRepository.class);
+    }
+
+    @Bean
+    public DeletarPetPorIdRepository deletarPetPorIdRepository(Jdbi jdbi) {
+        return jdbi.onDemand(DeletarPetPorIdRepository.class);
     }
 }
