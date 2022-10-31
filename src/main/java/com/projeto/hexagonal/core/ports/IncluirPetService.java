@@ -1,7 +1,7 @@
 package com.projeto.hexagonal.core.ports;
 
-import com.projeto.hexagonal.core.domain.Pet;
+import com.projeto.hexagonal.application.presentation.request.IncluirPetRequest;
 
 public interface IncluirPetService {
-    public void incluirNovoPet(Pet pet);
+    public void incluirNovoPet(IncluirPetRequest petRequest);
 }

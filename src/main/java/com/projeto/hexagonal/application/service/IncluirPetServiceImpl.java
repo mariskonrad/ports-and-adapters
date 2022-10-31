@@ -1,8 +1,7 @@
 package com.projeto.hexagonal.application.service;
 
-import com.projeto.hexagonal.application.entity.PetEntity;
 import com.projeto.hexagonal.application.infrastructure.IncluirPetRepository;
-import com.projeto.hexagonal.core.domain.Pet;
+import com.projeto.hexagonal.application.presentation.request.IncluirPetRequest;
 import com.projeto.hexagonal.core.ports.IncluirPetService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-import static com.projeto.hexagonal.application.mapper.IncluirPetMapper.toEntity;
+import static com.projeto.hexagonal.application.mapper.IncluirPetMapper.requestToPet;
 
 @Service
 public class IncluirPetServiceImpl implements IncluirPetService {
@@ -22,13 +21,13 @@ public class IncluirPetServiceImpl implements IncluirPetService {
     }
 
     @Transactional
-    public void incluirNovoPet(Pet pet) {
-        PetEntity petEntity = toEntity(pet);
-        petEntity.setDataInclusao(LocalDateTime.now());
+    public void incluirNovoPet(IncluirPetRequest petRequest) {
+        var pet = requestToPet(petRequest);
+        pet.setDataInclusao(LocalDateTime.now());
         Long petId;
         if (Objects.isNull(pet.getId())) {
-            petId = incluirPetRepository.incluirNovoPet(petEntity);
-            petEntity.setId(petId);
+            petId = incluirPetRepository.incluirNovoPet(pet);
+            pet.setId(petId);
         }
     }
 }

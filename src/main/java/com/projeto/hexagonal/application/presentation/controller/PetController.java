@@ -34,8 +34,7 @@ public class PetController {
 
     @PostMapping
     public void incluir(@RequestBody @Valid IncluirPetRequest petRequest) {
-        var pet = requestToPet(petRequest);
-        incluirPetService.incluirNovoPet(pet);
+        incluirPetService.incluirNovoPet(petRequest);
     }
 
     @GetMapping("/{id}")

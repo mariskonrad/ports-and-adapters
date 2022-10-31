@@ -1,6 +1,6 @@
 package com.projeto.hexagonal.application.infrastructure;
 
-import com.projeto.hexagonal.application.entity.PetEntity;
+import com.projeto.hexagonal.core.domain.Pet;
 import org.jdbi.v3.sqlobject.customizer.BindBean;
 import org.jdbi.v3.sqlobject.locator.UseClasspathSqlLocator;
 import org.jdbi.v3.sqlobject.statement.GetGeneratedKeys;
@@ -12,5 +12,5 @@ public interface IncluirPetRepository {
 
     @SqlUpdate
     @GetGeneratedKeys
-    Long incluirNovoPet(@BindBean PetEntity petEntity);
+    Long incluirNovoPet(@BindBean Pet pet);
 }
