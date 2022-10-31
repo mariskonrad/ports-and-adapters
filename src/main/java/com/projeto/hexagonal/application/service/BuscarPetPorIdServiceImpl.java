@@ -5,7 +5,11 @@ import com.projeto.hexagonal.application.mapper.BuscarPorIdPetMapper;
 import com.projeto.hexagonal.application.presentation.response.PetResponse;
 import com.projeto.hexagonal.core.domain.Pet;
 import com.projeto.hexagonal.core.ports.BuscarPetPorIdService;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.util.Optional;
 
 @Service
 public class BuscarPetPorIdServiceImpl implements BuscarPetPorIdService {
@@ -18,7 +22,9 @@ public class BuscarPetPorIdServiceImpl implements BuscarPetPorIdService {
 
     @Override
     public PetResponse buscarPetPorId(Long id) {
-        Pet pet = buscarPetPorIdRepository.buscarPetPorId(id);
-        return BuscarPorIdPetMapper.toResponse(pet);
+        Optional<Pet> pet = Optional.ofNullable(Optional.ofNullable(buscarPetPorIdRepository.buscarPetPorId(id))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pet não encontrado")));
+
+        return BuscarPorIdPetMapper.toResponse(BuscarPorIdPetMapper.optionalToPet(pet));
     }
 }
